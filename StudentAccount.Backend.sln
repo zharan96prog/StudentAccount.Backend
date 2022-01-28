@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentAccount.WebAPI", "St
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentAccount.DataAccess", "StudentAccount.DataAccess\StudentAccount.DataAccess.csproj", "{303290DF-7B0D-4BDF-AA59-F3BF3A4F3D73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentBook.Domain", "StudentBook.Domain\StudentBook.Domain.csproj", "{81D36747-9A87-43D2-BE65-3A9B3F60B3DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentAccount.Domain", "StudentBook.Domain\StudentAccount.Domain.csproj", "{81D36747-9A87-43D2-BE65-3A9B3F60B3DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roles", "Roles\Roles.csproj", "{71F08096-B35E-426F-8C20-40CD4959C7DF}"
 EndProject

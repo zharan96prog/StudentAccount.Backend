@@ -17,14 +17,14 @@ namespace StudentAccount.DataAccess.Seeds
                 var users = new List<AppUser> {
                     new AppUser
                     {
-                        FirstName = "Admin",
-                        LastName = "Admin",
-                        Email = "admin@gmail.com",
-                        UserName = "admin@gmail.com",
-                        Age = 30,
+                        FirstName = "Alex",
+                        LastName = "Zimin",
+                        Email = "alexZ@gmail.com",
+                        UserName = "alexZ@gmail.com",
+                        Age = 27,
                         RefreshTokens = null,
                         EmailConfirmed = true,
-                        PhoneNumber = "80968695845",
+                        PhoneNumber = "80956395845",
                         RegisteredDate = DateTime.UtcNow
                     },
                     new AppUser
@@ -50,14 +50,74 @@ namespace StudentAccount.DataAccess.Seeds
                         EmailConfirmed = true,
                         PhoneNumber = "80925623589",
                         RegisteredDate = DateTime.UtcNow
+                    },
+                    new AppUser
+                    {
+                        FirstName = "Olga",
+                        LastName = "Minich",
+                        Email = "olga@gmail.com",
+                        UserName = "olga@gmail.com",
+                        Age = 21,
+                        RefreshTokens = null,
+                        EmailConfirmed = true,
+                        PhoneNumber = "80928523589",
+                        RegisteredDate = DateTime.UtcNow
+                    },
+                    new AppUser
+                    {
+                        FirstName = "Lilia",
+                        LastName = "Minchuk",
+                        Email = "lilia@gmail.com",
+                        UserName = "lilia@gmail.com",
+                        Age = 20,
+                        RefreshTokens = null,
+                        EmailConfirmed = true,
+                        PhoneNumber = "80925231589",
+                        RegisteredDate = DateTime.UtcNow
+                    },
+                    new AppUser
+                    {
+                        FirstName = "Liza",
+                        LastName = "Oleksiivec",
+                        Email = "liza@gmail.com",
+                        UserName = "liza@gmail.com",
+                        Age = 25,
+                        RefreshTokens = null,
+                        EmailConfirmed = true,
+                        PhoneNumber = "80925623589",
+                        RegisteredDate = DateTime.UtcNow
+                    },
+                    new AppUser
+                    {
+                        FirstName = "Pavel",
+                        LastName = "Dehtiar",
+                        Email = "pavel@gmail.com",
+                        UserName = "pavel@gmail.com",
+                        Age = 31,
+                        RefreshTokens = null,
+                        EmailConfirmed = true,
+                        PhoneNumber = "80920123589",
+                        RegisteredDate = DateTime.UtcNow
+                    },
+                    new AppUser
+                    {
+                        FirstName = "Orest",
+                        LastName = "Polykhovych",
+                        Email = "ores@gmail.com",
+                        UserName = "orest@gmail.com",
+                        Age = 18,
+                        RefreshTokens = null,
+                        EmailConfirmed = true,
+                        PhoneNumber = "80925258589",
+                        RegisteredDate = DateTime.UtcNow
                     }
                 };
                 var userAdmin = new AppUser
                 {
                     FirstName = "Admin",
                     LastName = "Admin",
-                    Email = "admin@studacc.com",
-                    UserName = "admin@studacc.com",
+                    Email = "admin@gmail.com",
+                    UserName = "admin@gmail.com",
                     Age = 20,
                     RegisteredDate = DateTime.UtcNow,
                     EmailConfirmed = true

@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Resources;
 using StudentAccount.DataAccess;
 using StudentAccount.DataAccess.Entity;
+using StudentAccount.Domain.ApiModel.RequestApiModels;
 using StudentBook.Domain.ApiModel.RequestApiModels;
 using StudentBook.Domain.ApiModel.ResponseApiModels;
 using StudentBook.Domain.Errors;
 using StudentBook.Domain.Interfaces;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -46,7 +46,7 @@ namespace StudentBook.Domain.Services
             {
                 var resultRole = await _userManager.AddToRoleAsync(user, Roles.Roles.userRole);
 
-                if (!resultRole.Succeeded)
+                if (!resultRole.Succeeded) 
                 {
                     return new ResponseApiModel<HttpStatusCode>(HttpStatusCode.BadRequest, false, Resources.ResourceManager.GetString("registrationFailed"));
                 }
@@ -115,6 +115,29 @@ namespace StudentBook.Domain.Services
             {
                 throw new RestException(HttpStatusCode.BadRequest, Resources.ResourceManager.GetString("LoginWrongCredentials"));
             }
+        }
+
+        public async Task<HttpStatusCode> UpdateUser(UpdateUserModel updateUserModel)
+        {
+            var user = await _userManager.FindByIdAsync(updateUserModel.Id);
+
+            if (user == null)
+            {
+                throw new RestException(HttpStatusCode.NotFound, "User not found");
+            }
+
+            user.FirstName = updateUserModel.FirstName;
+            user.LastName = updateUserModel.LastName;
+            user.Age = updateUserModel.Age;
+            user.Email = updateUserModel.Email;
+            user.UserName = updateUserModel.Email;
+
+            var success = await _context.SaveChangesAsync() > 0;
+            if (!success)
+            {
+                throw new RestException(HttpStatusCode.BadRequest, "User isn't updated" ); ;
+            }
+            return HttpStatusCode.OK;
         }
     }
 }
