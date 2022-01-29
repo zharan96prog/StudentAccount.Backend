@@ -10,6 +10,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StudentAccount.DataAccess;
 using StudentAccount.DataAccess.Entity;
+using StudentAccount.Domain.Interfaces;
+using StudentAccount.Domain.Queries;
 using StudentAccount.WebAPI.Middleware;
 using StudentBook.Domain.Interfaces;
 using StudentBook.Domain.Services;
@@ -56,6 +58,7 @@ namespace StudentAccount.WebAPI
             services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IUserQueriesService, UserQueriesService>();
 
             var jwtTokenSecretKey = Configuration.GetValue<string>("Secret");
             var signInKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenSecretKey));

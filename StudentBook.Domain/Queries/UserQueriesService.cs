@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StudentAccount.DataAccess;
 using StudentAccount.DataAccess.Entity;
@@ -23,12 +22,6 @@ namespace StudentAccount.Domain.Queries
             this.userManager = userManager;
             this.context = context;
 
-        }
-        public async Task<User> EmailConfirmation(HttpContext httpContext)
-        {
-            var user = await userManager.FindByEmailAsync(httpContext.Request.Query["Email"].ToString());
-            await userManager.ConfirmEmailAsync(user, httpContext.Request.Query["Token"].ToString());
-            return null;
         }
 
         public async Task<PaginationModel> GetAllUsers(MoreParametersModel model)

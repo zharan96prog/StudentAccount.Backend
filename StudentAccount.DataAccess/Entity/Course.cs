@@ -16,6 +16,6 @@ namespace StudentAccount.DataAccess.Entity
         public DateTime EndCourse { get; set; }
 
         public virtual Picture Pictures { get; set; }
-        public virtual List<AppUser> Users { get; set; }
+        public virtual AppUser Users { get; set; }
     }
 }

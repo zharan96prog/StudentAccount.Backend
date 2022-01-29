@@ -203,11 +203,18 @@ namespace StudentAccount.WebAPI.Migrations
                     CourseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartCourse = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndCourse = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PicturesId = table.Column<int>(type: "int", nullable: true)
+                    PicturesId = table.Column<int>(type: "int", nullable: true),
+                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Courses_AspNetUsers_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Courses_Pictures_PicturesId",
                         column: x => x.PicturesId,
@@ -215,35 +222,6 @@ namespace StudentAccount.WebAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "AppUserCourse",
-                columns: table => new
-                {
-                    CoursesId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserCourse", x => new { x.CoursesId, x.UsersId });
-                    table.ForeignKey(
-                        name: "FK_AppUserCourse_AspNetUsers_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AppUserCourse_Courses_CoursesId",
-                        column: x => x.CoursesId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUserCourse_UsersId",
-                table: "AppUserCourse",
-                column: "UsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -290,6 +268,11 @@ namespace StudentAccount.WebAPI.Migrations
                 column: "PicturesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Courses_UsersId",
+                table: "Courses",
+                column: "UsersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RefreshTokens_AppUserId",
                 table: "RefreshTokens",
                 column: "AppUserId",
@@ -298,9 +281,6 @@ namespace StudentAccount.WebAPI.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AppUserCourse");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -317,19 +297,19 @@ namespace StudentAccount.WebAPI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "RefreshTokens");
+                name: "Courses");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "RefreshTokens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
-                name: "Pictures");
+                name: "AspNetUsers");
         }
     }
 }

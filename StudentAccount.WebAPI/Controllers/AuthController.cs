@@ -14,13 +14,11 @@ namespace StudentAccount.WebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _serviceAccount;
-        private readonly IJwtService _jwtService;
         private readonly IUserQueriesService _queryUserService;
 
-        public AuthController(IAuthService serviceAccount, IJwtService jwtService, IUserQueriesService queryUserService)
+        public AuthController(IAuthService serviceAccount, IUserQueriesService queryUserService)
         {
             _serviceAccount = serviceAccount;
-            _jwtService = jwtService;
             _queryUserService = queryUserService;
         }
 
@@ -41,14 +39,21 @@ namespace StudentAccount.WebAPI.Controllers
         }
 
         [Authorize(Roles = Roles.Roles.adminRole)]
-        [HttpGet("adminList/")]
+        [HttpGet("allUsers/")]
         public async Task<PaginationModel> GetAllUsers(MoreParametersModel model)
         {
             return await _queryUserService.GetAllUsers(model);
         }
 
         [Authorize(Roles = Roles.Roles.adminRole)]
-        [HttpPut]
+        [HttpGet("getUserById/{id}")]
+        public async Task<ActionResult<User>> GetUserById(string Id)
+        {
+            return await _queryUserService.GetUserById(Id);
+        }
+
+        [Authorize(Roles = Roles.Roles.adminRole)]
+        [HttpPut("updateUser/")]
         public async Task<HttpStatusCode> UpdateUser(UpdateUserModel updateUserModel)
         {
             return await _serviceAccount.UpdateUser(updateUserModel);

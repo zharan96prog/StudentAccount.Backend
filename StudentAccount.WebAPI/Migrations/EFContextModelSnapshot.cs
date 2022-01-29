@@ -19,21 +19,6 @@ namespace StudentAccount.WebAPI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("AppUserCourse", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("CoursesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("AppUserCourse");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -262,9 +247,14 @@ namespace StudentAccount.WebAPI.Migrations
                     b.Property<DateTime>("StartCourse")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UsersId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PicturesId");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Courses");
                 });
@@ -310,21 +300,6 @@ namespace StudentAccount.WebAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasDiscriminator().HasValue("AppUser");
-                });
-
-            modelBuilder.Entity("AppUserCourse", b =>
-                {
-                    b.HasOne("StudentAccount.DataAccess.Entity.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("StudentAccount.DataAccess.Entity.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -384,7 +359,13 @@ namespace StudentAccount.WebAPI.Migrations
                         .WithMany()
                         .HasForeignKey("PicturesId");
 
+                    b.HasOne("StudentAccount.DataAccess.Entity.AppUser", "Users")
+                        .WithMany("Courses")
+                        .HasForeignKey("UsersId");
+
                     b.Navigation("Pictures");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("StudentAccount.DataAccess.Entity.AppUser", b =>
@@ -424,6 +405,11 @@ namespace StudentAccount.WebAPI.Migrations
                         });
 
                     b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("StudentAccount.DataAccess.Entity.AppUser", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

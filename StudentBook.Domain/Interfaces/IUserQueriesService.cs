@@ -8,7 +8,6 @@ namespace StudentAccount.Domain.Interfaces
 {
     public interface IUserQueriesService
     {
-        Task<User> EmailConfirmation(HttpContext httpContext);
         Task<PaginationModel> GetAllUsers(MoreParametersModel model);
         Task<User> GetUserById(string Id);
         IQueryable<AppUser> SearchUsers(string searchName);
